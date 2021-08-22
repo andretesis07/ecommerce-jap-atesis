@@ -13,6 +13,7 @@
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <script src="js/login.js" charset="utf-8"></script>
   <style>
     html, body{
       height: 100%;
@@ -39,12 +40,25 @@
 
 <body class="text-center">
   <div class="container p-5">
-    <div class="alert alert-danger" role="alert" style="position: relative; width:auto; top: 0;">
-      <h4 class="alert-heading">¡A trabajar! :)</h4>
-      <p>Esta sección corresponde a: Entrega 1 (Fecha de entrega: 08/08/2021).</p>
-      <hr>
-      <p class="mb-0">Para saber qué debes hacer, fijate en la actividad en CREA correspondiente a esta entrega.</p>
-    </div>
+    <form class="container">
+      <div class="form-group">
+        <label for="usuario">Usuario</label>
+        <input type="text" class="form-control" id="usuario" placeholder="Ingrese usuario">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Ingrese email">
+      </div>
+      <button type="button" class="btn btn-primary" onClick="conectar();">Conectar</button>
+    </form>
+
+    <!-- Si esta conectado redirecciona a la pagina principal -->
+    <script>
+      let usuario=JSON.parse(localStorage.getItem("usuario"));
+      if(usuario.estado=='conectado'){
+        location.href='index.html';
+      }
+    </script>
   </div>
 
   <script src="js/init.js"></script>
