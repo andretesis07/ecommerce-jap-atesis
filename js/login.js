@@ -1,17 +1,17 @@
     function conectar(){
-        let dato = {}
-        let usuario = document.getElementById('usuario').value;
+        let usuario = {}
+        let nombre = document.getElementById('nombre').value;
         let password = document.getElementById('password').value;
     
         // Verifico si algo del formulario está vacio
-        if(usuario.trim() === '' || password.trim() === ''){
+        if(nombre.trim() === '' || password.trim() === ''){
         alert('Nombre de usuario y/o contraseña vacio/s');
         } else {
-        dato.usuario = usuario;
-        dato.password = password;
-        dato.estado = true;
+        usuario.nombre = nombre;
+        usuario.password = password;
+        usuario.estado = true;
         // Guardo en el localStorage
-        localStorage.setItem('dato',JSON.stringify(dato));
+        localStorage.setItem('usuario',JSON.stringify(usuario));
         location.href = "./index.html";
         }
     }
@@ -61,6 +61,3 @@
     //elementos HTML presentes.
     document.addEventListener("DOMContentLoaded", function(e){
     })
-
-    let usuario=JSON.parse(localStorage.getItem("usuario"));
-
