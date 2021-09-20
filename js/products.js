@@ -1,34 +1,32 @@
-var categoriesArray = [];
+var productsArray = [];
 
-function showCategoriesList(array){
+function showProductsList(array){
     showSpinner();
     let htmlContentToAppend = "";
     for(let i = 0; i < array.length; i++){
-        let category = array[i];
+        let products = array[i];
 
         htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action">
+        <a href="product-info" class="list-group-item list-group-item-action">
             <div class="row">
                 <div class="col-3">
-                    <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
+                    <img src="` + products.imgSrc + `" alt="` + products.description + `" class="img-thumbnail">
                 </div>
                 <div class="col">
                     <div class="d-flex w-100 justify-content-between">
-                        <h4 class="mb-1">`+ category.name +`</h4>
-                        <small class="text-muted">` + "Vendidos: " + category.soldCount + ` artículos</small>
+                        <h4 class="mb-1">`+ products.name +`</h4>
+                        <small class="text-muted">` + "Vendidos: " + products.soldCount + ` artículos</small>
                     </div>
                         <hr></hr>
-                        <p class="mb-1">`+ category.description +`</p>
+                        <p class="mb-1">`+ products.description +`</p>
                         <br> 
-                        <b> <p class="mb-1">`+ category.currency + " " + category.cost +`</p> </b>
+                        <b> <p class="mb-1">`+ products.currency + " " + products.cost +`</p> </b>
                     </div>
-
                 </div>
             </div>
-        </div>
+        </a>
         `
-
-        document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
+        document.getElementById("prod-list-container").innerHTML = htmlContentToAppend;
     }
     hideSpinner();
 }
@@ -43,9 +41,64 @@ document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(PRODUCTS_URL).then(function(resultObj){
         if (resultObj.status === "ok")
         {
-            categoriesArray = resultObj.data;
+            productsArray = resultObj.data;
             //Muestro las categorías ordenadas
-            showCategoriesList(categoriesArray);
+            showProductsList(productsArray);
         }
     });
 });
+
+// Funciones de ordenamiento
+
+//Filtro precio
+function filtrar(){
+    let minimo=parseInt(document.getElementById("min").value);
+    let maximo=parseInt(document.getElementById("max").value);
+    
+    let productsArrayFilt = productsArray.filter((product)=>{
+        return product.cost<=maximo && product.cost>=minimo;
+    });
+ showProductsList(productsArrayFilt);
+}
+
+//Limpio filtro
+function limpiar(){
+    document.getElementById("min").value="";
+    document.getElementById("max").value="";
+    
+    showProductsList(productsArray);
+}
+
+//Buscador
+function buscar(){
+	var resultbuscador = [];
+	var inputTxt = document.getElementById("buscador").value.toUpperCase();
+	var resultbuscador = productsArray.filter((product)=>{  
+		return product.name.toUpperCase().includes(inputTxt);
+	});
+	showProductsList(resultbuscador);
+}
+
+//Ascendente
+function ascendente(){
+    productsArray.sort((elementoA,elementoB)=>{
+        return elementoA.cost-elementoB.cost;
+    });
+    showProductsList(productsArray);
+}
+
+//Descendente
+function descendente(){
+    productsArray.sort((elementoA,elementoB)=>{
+        return elementoB.cost-elementoA.cost;
+    });
+    showProductsList(productsArray);
+};
+
+//Por Relevancia
+function porRelevancia(){
+    productsArray.sort((elementoA,elementoB)=>{
+        return elementoB.soldCount - elementoA.soldCount;
+    });
+    showProductsList(productsArray);
+};
