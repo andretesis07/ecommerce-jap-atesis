@@ -13,6 +13,7 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -31,19 +32,33 @@
             <div class="row">
               <div class="col">
                 <div class="card">
-                  <div class="card-header  .bg-light">
-                    <h1 id="productName"></h1>
-                  </div>
-                  <div class="p-3 ">
-                    <p class="card-text"></p>
-                  <div class="card-footer">
-                    <p class="text-center">El usuario: <span id="commentUser"> </span> dijo sobre <span id="productName"> </span>:</p>
-                    <p class="text-center">"<span id="commentDescription"></span>"</p>
-                    <p class="text-center">Puntuacion: <span id="commentScore"></span></p>
-
-                  </div>
-                
-              </div>
+                  <div class="container">
+                    <div class="row">
+                        <div class="list-group" id="comment-list-container">
+                        </div>
+                        <div class="col">
+                          <p>Agregue su opinion:</p>
+                          <label for="usuario"> <input type="text" class="form-control" id="usuario" placeholder="Escriba su nombre de usuario"> </label>
+                          <br>
+                          <label for="comentario"> <input type="text" class="form-control" id="comentario" placeholder="Escriba su opinion"> </label>
+                          <form>
+                            <p class="clasificacion"> Puntuacion: 
+                              <input id="radio1" type="radio" name="estrellas" value="5">
+                              <label for="radio1">★</label>
+                              <input id="radio2" type="radio" name="estrellas" value="4">
+                              <label for="radio2">★</label>
+                              <input id="radio3" type="radio" name="estrellas" value="3">
+                              <label for="radio3">★</label>
+                              <input id="radio4" type="radio" name="estrellas" value="2">
+                              <label for="radio4">★</label>
+                              <input id="radio5" type="radio" name="estrellas" value="1">
+                              <label for="radio5">★</label>
+                            </p>
+                          </form>
+                          <button id="sub" class="btn btn-success">Guardar </button>
+                        </div>
+                    </div>
+                </div>>
             </div>
           </div>
     </main>
