@@ -1,7 +1,7 @@
     function conectar(){
         let usuario = {}
-        let nombre = document.getElementById('nombre').value;
-        let password = document.getElementById('password').value;
+            let nombre = document.getElementById('nombre').value;
+            let password = document.getElementById('password').value;
     
         // Verifico si algo del formulario está vacio
         if(nombre.trim() === '' || password.trim() === ''){
