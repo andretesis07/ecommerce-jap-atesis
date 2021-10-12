@@ -56,8 +56,8 @@ function showRelatedProductsList(array){
         <a href="products.html" class="list-group-item list-group-item-action">
             <div class="col">
                 <div class="col-3">
-                    <img src="` + products1.imgSrc + `" class="img-thumbnail">
-                    <h4 class="mb-1">`+ products1.name +`</h4>
+                    <img src="` + products.imgSrc + `" class="img-thumbnail">
+                    <h4 class="mb-1">`+ products.name +`</h4>
                 </div>
             </div>
         </a>
