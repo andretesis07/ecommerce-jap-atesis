@@ -27,8 +27,6 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 });
 
-
-
 function relatedProducts(arrayRelated){
     arrayNuevo = {};
     for (let i = 0; i < array.length; i++){
