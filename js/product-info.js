@@ -21,40 +21,40 @@ document.addEventListener("DOMContentLoaded", function(e){
             productSoldCountHTML.innerHTML = product.soldCount;
             productImagesHTML.innerHTML = product.images;
             productRelatedProducts.innerHTML = product.relatedProducts;
+
+            product.relatedProducts = arrayRelated;
         }
     });
 });
 
-var relatedArray = [];
 
-document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(PRODUCTS_URL).then(function(resultObj){
-        if (resultObj.status === "ok")
-        {
-            productsArray = resultObj.data;
-            //Muestro las categorías ordenadas
 
-            firstProduct = productsArray[1];
-            secondProduct = productsArray[3];
-
-            
-            relatedArray = commentsArray.push(firstProduct);
-            relatedArray = commentsArray.push(secondProduct);
-
-            showRelatedProductsList(productsArray);
-        }
-    });
-});
+function relatedProducts(arrayRelated){
+    arrayNuevo = {};
+    for (let i = 0; i < array.length; i++){
+        indice = arrayRelated[i];
+        document.addEventListener("DOMContentLoaded", function (e) {
+            getJSONData(PRODUCTS_URL).then(function(resultObj){
+                if (resultObj.status === "ok")
+                {
+                    arrayAux = resultObj.data;
+                    arrayNuevo[i] = arrayAux[indice];
+                }
+            });
+        });
+    }
+    showRelatedProductsList(arrayNuevo)
+}
 
 function showRelatedProductsList(array){
     showSpinner();
     let htmlContentToAppend = "";
-    
-        let products1 = array[1];
+    for(let i = 0; i < array.length; i++){
+        let products = array[i];
 
         htmlContentToAppend += `
         <a href="products.html" class="list-group-item list-group-item-action">
-            <div class="row">
+            <div class="col">
                 <div class="col-3">
                     <img src="` + products1.imgSrc + `" class="img-thumbnail">
                     <h4 class="mb-1">`+ products1.name +`</h4>
@@ -63,6 +63,6 @@ function showRelatedProductsList(array){
         </a>
         `
         document.getElementById("prod-related-list-container").innerHTML = htmlContentToAppend;
-    
+    }
     hideSpinner();
 }
