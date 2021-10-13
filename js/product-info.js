@@ -27,40 +27,33 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 });
 
-function relatedProducts(arrayRelated){
-    arrayNuevo = {};
-    for (let i = 0; i < array.length; i++){
-        indice = arrayRelated[i];
-        document.addEventListener("DOMContentLoaded", function (e) {
-            getJSONData(PRODUCTS_URL).then(function(resultObj){
-                if (resultObj.status === "ok")
-                {
-                    arrayAux = resultObj.data;
-                    arrayNuevo[i] = arrayAux[indice];
-                }
-            });
-        });
-    }
-    showRelatedProductsList(arrayNuevo)
-}
+document.addEventListener("DOMContentLoaded", function (e) {
+    getJSONData(PRODUCTS_URL).then(function(resultObj){
+        if (resultObj.status === "ok")
+        {
+            productsArray = resultObj.data;
+            showRelatedProductsList(productsArray);
+        }
+    });
+});
 
 function showRelatedProductsList(array){
-    showSpinner();
-    let htmlContentToAppend = "";
-    for(let i = 0; i < array.length; i++){
-        let products = array[i];
+    let relatedProducts = "";
+    for(let i = 0; i < product.relatedProducts.length; i++){
+        let products = product.relatedProducts[i];
 
-        htmlContentToAppend += `
-        <a href="products.html" class="list-group-item list-group-item-action">
-            <div class="col">
-                <div class="col-3">
-                    <img src="` + products.imgSrc + `" class="img-thumbnail">
-                    <h4 class="mb-1">`+ products.name +`</h4>
-                </div>
-            </div>
-        </a>
+        relatedProducts += `
+        <div class="card-group">
+                    <img class="card-img-top" style="width: 18rem;" src="`+ array[products].imgSrc + `"alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title"> `+ array[products].name +`</h5>
+                        <p class="card-text">`+ array[products].currency +` `+ array[products].cost +`</p>
+                        <p class="card-text">`+ array[products].description +`</p>
+                        <a href="products.html" class="btn btn-primary">Màs informaciòn</a>
+                    </div>
+        </div>
         `
-        document.getElementById("prod-related-list-container").innerHTML = htmlContentToAppend;
+        document.getElementById("prod-related-list-container").innerHTML = relatedProducts;
     }
     hideSpinner();
 }
