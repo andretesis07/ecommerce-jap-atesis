@@ -63,21 +63,80 @@
     </div>
   </nav>
   <main>
-    <div class="text-center p-4">
-      <h2>Carrito de compras</h2>
-      <p class="lead">Verás aquí todos los prodctos que hayas agregado a tu carrito.</p>
-    </div>
-    <div class="container">
-      <div id="articlesHTML">
-        <p>Aún no tienes nada en el carrito</p>
+      <div class="text-center p-4">
+        <h2>Carrito de compras</h2>
+        <p class="lead">Verás aquí todos los prodctos que hayas agregado a tu carrito.</p>
       </div>
-    </div>
+      <div class="container">
+          <div id="articlesHTML"></div>
+      </div>
     <div id="subtotalHTML"></div>
-          </div>
-        </div>
-      </div>
+    <div class="container">
+      <button type="button" class="btn btn-dark text-center float-right" onclick="convertirUSDaUYU(subtotalUSD)"> Convertir a UYU </button>
+      <br><br>
     </div>
-    
+    <div id="subtotalEnPesos" class="container">
+    </div>
+
+    <div class="text-center p-4">
+      <h4>Metodo de envio</h4>
+        <div class="container">
+          <p>Ingrese datos para envio</p>
+        </div>
+        <div class="container">
+          <div class="form-group">
+            <label>Dirección</label>
+            <input type="text" class="form-control" placeholder="Calle">
+          </div>
+          
+            <div class="form-group">
+              <label>Numero</label>
+              <input type="number" class="form-control" placeholder="Nº de Puerta">
+            </div>
+            <div class="form-group">
+              <label>Esquina</label>
+              <input type="text" class="form-control" placeholder="Calle">
+            </div>
+            <div class="form-group">
+              <label>CP</label>
+              <input type="number" class="form-control">
+            </div>
+            <div class="form-group">
+              <label>Pais</label>
+              <select class="form-control"></select>
+            </div>
+            <div class="form-group">
+              <label>Departamento, Provincia o Estado</label>
+              <select class="form-control"></select>
+            </div>
+          
+        </div>
+
+    <div class="text-center p-4">
+      <h4>Metodo de pago</h4>
+      <div class="container">
+        <p>Ingrese datos de pago</p>
+      </div>
+
+      <div class="container">
+                  <div class="form-group">
+                    <label>Número de tarjeta</label>
+                    <input type="number" class="form-control" placeholder="Ej: 1234 5678 9101 1121">
+                  </div>
+                  <div class="form-group">
+                    <label>Código de seg.</label>
+                    <input type="number" class="form-control" max="999" placeholder="XXX">
+                  </div>
+                  
+                  <div class="form-group">
+                    <label>Vencimiento</label>
+                    <input type="text" class="form-control" placeholder="MM/AA">
+                  </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-dark btn-lg btn-block">Confirmar Compra</button>
+                </div>
+      </div>   
+    </div>
   </main>
   
   <div id="spinner-wrapper">

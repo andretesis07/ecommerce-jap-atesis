@@ -2,9 +2,6 @@ let productUnitCost = 0;
 let productCurrency = "";
 let subtotalUYU = 0;
 let subtotalUSD = 0;
-let shippingCostUYU = 0;
-let shippingCostUSD = 0;
-let shippingPercentage = 0.15;
 let total = 0;
 let currentArticlesArray = [];
 let productUnitCostUYUArray = [];
@@ -16,7 +13,7 @@ function showArticles(array) {
     for (let i = 0; i < array.length; i++) {
         let article = array[i];
         articlesHTMLtoAppend += `
-            <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-2">
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 col-xl-3">
                 <div class="card shadow-sm">
                     <img src=" ${article.src}" class="p-2 card-img-top">
                     <div class="card-body">
@@ -24,7 +21,7 @@ function showArticles(array) {
                         <small class="text-muted"> Precio unitario: ${article.currency} ${article.unitCost} </small>
                         <form>
                             <div class="row">
-                                <div class="col-5">
+                                <div class="col-2 col-lg-6">
                                     <label for="articleCount">Cantidad</label>
                                     <input id="articleCount${i}" class="form-control articleCount" type="number" min="0" value="` + article.count + `">
                                     <button type="submit" disabled style="display: none" aria-hidden="true"></button>
@@ -71,38 +68,28 @@ function updateSubtotal(array) {
         subtotalUYU += productUnitCountArray[i] * productUnitCostUYUArray[i];
     }
     showSubtotal(subtotalUYU, subtotalUSD);
-    document.getElementById("goldradio").checked = true;
-    updateShippingCost(0.15);
 }
 
-function updateShippingCost(shippingPercentage) {
-    shippingCostUYU = Math.round(shippingPercentage * subtotalUYU * 100) / 100;
-    shippingCostUSD = Math.round(shippingPercentage * subtotalUSD * 100) / 100;
-
-    shippingCostHTMLtoAppend = `
-        <p> UYU ${shippingCostUYU} </p><p>USD ${shippingCostUSD}</p>
-     `
-    document.getElementById("shippingCost").innerHTML = shippingCostHTMLtoAppend;
-    updateTotalCosts();
+function convertirUSDaUYU(subtotalUSD){
+    subtotalUYU = subtotalUYU + subtotalUSD*40;
+    subtotalUSD = 0;
+    subtotalHTMLtoAppend = `
+        <div class ="container">
+            <hr>
+            <div align="right">
+                <h6>Subtotal solo en UYU ${subtotalUYU} </h6>
+            </div>
+            <hr>
+        </div>
+         `
+    document.getElementById("subtotalEnPesos").innerHTML = subtotalHTMLtoAppend;
 }
-
-function updateTotalCosts() {
-    totalUYU = subtotalUYU + shippingCostUYU;
-    totalUSD = subtotalUSD + shippingCostUSD;
-
-    totalHTMLtoAppend = `
-    <h4 class="text-center">Total a pagar: UYU ${totalUYU} y USD ${totalUSD} </h4>
-    `
-    document.getElementById("total").innerHTML = totalHTMLtoAppend;
-}
-
-
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function (e) {
-    getJSONData(CART_INFO_URL).then(function (resultObj) {
+    getJSONData(CART_NEW_ELEMENTS).then(function (resultObj) {
         if (resultObj.status === "ok") {
             articles = resultObj.data;
             currentArticlesArray = articles.articles;
@@ -120,7 +107,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             }
             showArticles(currentArticlesArray);
             updateSubtotal(currentArticlesArray);
-            updateShippingCost(0.15);
+            
         }
     });
 });
